@@ -1,16 +1,27 @@
 class Planeta {
-  constructor({ position, raio, color, massa }) {
+  constructor({ position, raio, color, imageSrc, massa }) {
     this.position = position;
     this.raio = raio;
     this.color = color || "blue";
+    this.image = new Image();
+    this.image.src = imageSrc;
     this.massa = massa;
   }
-  update() {
-    // implementar aqui as atualizações da posição do planeta
-  }
   draw() {
-    ctx.fillStyle = this.color;
-    ctx.arc(this.position.x, this.position.y, this.raio, 0, 2 * Math.PI);
+    ctx.beginPath();
+    if (this.image) {
+      ctx.drawImage(
+        this.image,
+        this.position.x - this.raio,
+        this.position.y - this.raio,
+        this.raio * 2,
+        this.raio * 2
+      );
+    } else {
+      ctx.fillStyle = this.color;
+      ctx.arc(this.position.x, this.position.y, this.raio, 0, 2 * Math.PI);
+    }
+
     ctx.fill();
   }
 }
@@ -26,7 +37,9 @@ class Tiro {
     this.aceleracao = aceleracao;
   }
   update() {
-    let f = (planeta.massa * this.massa) / distancia(this, planeta) ** 2;
+    const dist = distancia(this, planeta);
+
+    let f = (planeta.massa * this.massa) / dist ** 2;
 
     let fX =
       f *
@@ -63,39 +76,48 @@ class Tiro {
     // colisao
 
     if (distancia(this, planeta) <= this.raio + planeta.raio) {
-      this.velocidade.x *= -1;
-      this.velocidade.y *= -1;
+      // Diminui a velocidade gradualmente
+      this.velocidade.x *= 0.9;
+      this.velocidade.y *= 0.9;
 
-      if (Math.abs(this.velocidade.x) < 0.5) {
+      // Se a velocidade for muito pequena, zera para evitar valores muito pequenos
+      if (Math.abs(this.velocidade.x) < 0.1) {
         this.velocidade.x = 0;
-      } else {
-        this.velocidade.x = this.velocidade.x / 1.5;
       }
-      if (Math.abs(this.velocidade.y) < 0.5) {
+      if (Math.abs(this.velocidade.y) < 0.1) {
         this.velocidade.y = 0;
-      } else {
-        this.velocidade.y = this.velocidade.y / 1.5;
       }
+
+      // Corrige sobreposição da bola com o planeta
+      const dx = this.position.x - planeta.position.x;
+      const dy = this.position.y - planeta.position.y;
+
+      const overlap = this.raio + planeta.raio - dist;
+      const normal = { x: dx / dist, y: dy / dist }; // Vetor normalizado
+
+      this.position.x += normal.x * overlap;
+      this.position.y += normal.y * overlap;
     }
 
-    if(!this.velocidade.x == 0)this.position.x += this.velocidade.x;
-    if(!this.velocidade.y ==0)this.position.y += this.velocidade.y;
+    if (this.velocidade.x !== 0) this.position.x += this.velocidade.x;
+    if (this.velocidade.y !== 0) this.position.y += this.velocidade.y;
   }
   draw() {
+    ctx.beginPath();
     ctx.fillStyle = this.color;
-    ctx.strokeStyle = 'rgba(0,150,0,.4)';
+    ctx.strokeStyle = "rgba(0,150,0,.4)";
     ctx.lineWidth = 5;
     ctx.arc(this.position.x, this.position.y, this.raio, 0, 2 * Math.PI);
-    ctx.stroke()
+    ctx.stroke();
     ctx.fill();
 
-    document.querySelector('#posX').innerHTML = this.position.x.toFixed(2)
-    document.querySelector('#posY').innerHTML = this.position.y.toFixed(2)
+    document.querySelector("#posX").innerHTML = this.position.x.toFixed(2);
+    document.querySelector("#posY").innerHTML = this.position.y.toFixed(2);
 
-    document.querySelector('#velX').innerHTML = this.velocidade.x.toFixed(2)
-    document.querySelector('#velY').innerHTML = this.velocidade.y.toFixed(2)
+    document.querySelector("#velX").innerHTML = this.velocidade.x.toFixed(2);
+    document.querySelector("#velY").innerHTML = this.velocidade.y.toFixed(2);
 
-    document.querySelector('#acX').innerHTML = this.aceleracao.x.toFixed(2)
-    document.querySelector('#acY').innerHTML = this.aceleracao.y.toFixed(2)
+    document.querySelector("#acX").innerHTML = this.aceleracao.x.toFixed(2);
+    document.querySelector("#acY").innerHTML = this.aceleracao.y.toFixed(2);
   }
 }

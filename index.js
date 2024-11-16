@@ -11,13 +11,14 @@ const planeta = new Planeta({
   },
   raio: 150,
   color: "#55f", 
+  imageSrc: "Images/Planeta.png",
   massa: 9999,
 });
 
 const bola = new Tiro({
   position: {
     x: canvas.width/2,
-    y: planeta.position.y - planeta.raio - 100,
+    y: planeta.position.y - planeta.raio - 80,
   },
   raio: 15,
   color: "#eee",
@@ -56,3 +57,13 @@ function distancia(a,b){
    return (distacia)
   }
   
+  window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  
+    // Atualiza posições 
+    planeta.position = {
+      x: canvas.width / 2,
+      y: canvas.height / 2,
+    };
+  });

@@ -7,7 +7,7 @@
 
     <script src="Terra.js" defer></script>
     <script src="index.js" defer></script>
-    
+
     <title>Document</title>
     <style>
         * {
@@ -15,17 +15,23 @@
             padding: 0;
             overflow: hidden;
         }
-        canvas{
+
+        canvas {
             background-color: black;
+            background-image: url(images/universe.jpg);
         }
     </style>
 </head>
 
 <body>
-    <article style="position: absolute; top: 25px;left: 25px; color: #fff;font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 100;">
-        <h2>Posição : (<output id="posX"></output>,<output id="posY"></output>)</h2>
-        <h2>Velocidade:(<output id="velX">0</output>,<output id="velY">0</output>)</h2>
-        <h2>Aceleração:(<output id="acX">0</output>,<output id="acY">0</output>)</h2>
+    <article
+        style="position: absolute; top: 25px;left: 25px; color: #fff;font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 100;">
+        <details>
+            <summary>Infos</summary>
+            <h2>Posição : (<output id="posX"></output>,<output id="posY"></output>)</h2>
+            <h2>Velocidade:(<output id="velX">0</output>,<output id="velY">0</output>)</h2>
+            <h2>Aceleração:(<output id="acX">0</output>,<output id="acY">0</output>)</h2>
+        </details>
     </article>
     <canvas id="tela"></canvas>
 
