@@ -110,14 +110,5 @@ class Tiro {
     ctx.arc(this.position.x, this.position.y, this.raio, 0, 2 * Math.PI);
     ctx.stroke();
     ctx.fill();
-
-    document.querySelector("#posX").innerHTML = this.position.x.toFixed(2);
-    document.querySelector("#posY").innerHTML = this.position.y.toFixed(2);
-
-    document.querySelector("#velX").innerHTML = this.velocidade.x.toFixed(2);
-    document.querySelector("#velY").innerHTML = this.velocidade.y.toFixed(2);
-
-    document.querySelector("#acX").innerHTML = this.aceleracao.x.toFixed(2);
-    document.querySelector("#acY").innerHTML = this.aceleracao.y.toFixed(2);
   }
 }

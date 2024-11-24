@@ -20,17 +20,49 @@
             background-color: black;
             background-image: url(images/universe.jpg);
         }
+
+        details {
+            color: #fff;
+            padding: 1em;
+        }
+
+        summary {
+            all: unset;
+            color: #000;
+            background-color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            padding: .5em 1em;
+        }
+
+        #infosContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1em;
+            background-color: #062638a6;
+            margin-top: 1em;
+            padding: 1em;
+        }
+
+        .infoSatelite {
+            font-family: 'Courier New', Courier, monospace;
+            padding: 1em;
+            border-left: 5px solid #f00;
+            background-color: #0e5985a6;
+            border-radius: 5px;
+        }
     </style>
 </head>
 
 <body>
     <article
         style="position: absolute; top: 25px;left: 25px; color: #fff;font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 100;">
-        <details>
+        <details id="infos">
             <summary>Infos</summary>
-            <h2>Posição : (<output id="posX"></output>,<output id="posY"></output>)</h2>
-            <h2>Velocidade:(<output id="velX">0</output>,<output id="velY">0</output>)</h2>
-            <h2>Aceleração:(<output id="acX">0</output>,<output id="acY">0</output>)</h2>
+            <div id="infosContainer">
+
+            </div>
         </details>
     </article>
     <canvas id="tela"></canvas>
