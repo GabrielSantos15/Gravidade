@@ -4,67 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="styles/style.css">
     <script src="Terra.js" defer></script>
     <script src="script.js" defer></script>
 
     <title>Document</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        canvas {
-            background-color: black;
-            background-image: url(images/universe.jpg);
-        }
-
-        details {
-            color: #fff;
-            padding: 1em;
-        }
-
-        summary {
-            all: unset;
-            color: #000;
-            background-color: #fff;
-            cursor: pointer;
-            border-radius: 5px;
-            padding: .5em 1em;
-        }
-
-        #infosContainer {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 1em;
-            background-color: #062638a6;
-            margin-top: 1em;
-            padding: 1em;
-        }
-
-        .infoSatelite {
-            font-family: 'Courier New', Courier, monospace;
-            padding: 1em;
-            border-left: 5px solid #f00;
-            background-color: #0e5985a6;
-            border-radius: 5px;
-        }
-    </style>
 </head>
 
 <body>
-    <article
-        style="position: absolute; top: 25px;left: 25px; color: #fff;font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 100;">
-        <details id="infos">
-            <summary>Infos</summary>
-            <div id="infosContainer">
+    <details id="infos">
+        <summary>Infos</summary>
+        <div id="infosContainer">
+        </div>
+    </details>
 
-            </div>
-        </details>
-    </article>
+    <div id="atirarContainer">
+        <h2>Velocidade</h2>
+        <div>
+            <label for="velocidadeX">X:</label>
+            <input type="number" name="velocidadeX" id="velocidadeX">
+            <label for="velocidadeY">Y:</label>
+            <input type="number" name="velocidadeY" id="velocidadeY">
+        </div>
+        <button onclick="Atirar()">Atirar</button>
+    </div>
     <canvas id="tela"></canvas>
 
 </body>

@@ -1,8 +1,8 @@
 const canvas = document.querySelector("#tela");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = document.documentElement.clientWidth;
+canvas.height = document.documentElement.clientHeight;
 
 const planeta = new Planeta({
   position: {
@@ -15,43 +15,24 @@ const planeta = new Planeta({
   massa: 9999,
 });
 
-const bola = new Tiro({
-  position: {
-    x: canvas.width / 2,
-    y: planeta.position.y - planeta.raio - 80,
+const canhao = {
+  position:{
+    x: planeta.position.x ,
+    y: planeta.position.y - planeta.raio
   },
-  raio: 15,
-  color: "#eee",
-  massa: 1,
-  velocidade: {
-    x: 7,
-    y: 0,
-  },
-  aceleracao: {
-    x: 0,
-    y: 0,
-  },
-});
+  projetil: {
+    velocidade: {
+      x: 7,
+      y: 0,
+    },
+    aceleracao: {
+      x: 0,
+      y: 0,
+    }
+  }
+}
 
-const bola2 = new Tiro({
-  position: {
-    x: canvas.width / 2,
-    y: planeta.position.y - planeta.raio - 80,
-  },
-  raio: 15,
-  color: "#eee",
-  massa: 1,
-  velocidade: {
-    x: 8,
-    y: 0,
-  },
-  aceleracao: {
-    x: 0,
-    y: 0,
-  },
-});
-
-const satelites = [bola, bola2];
+const satelites = [];
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -80,8 +61,8 @@ function distancia(a, b) {
 }
 
 window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = document.documentElement.clientWidth;
+  canvas.height = document.documentElement.clientHeight;
 
   // Atualiza posições
   planeta.position = {
@@ -113,4 +94,31 @@ satelites.map((satelite,index) => {
         </details>
     `;
   });
+}
+
+function Atirar(){
+  let velocidadeX = parseFloat(document.querySelector("#velocidadeX").value || 0);
+  let velocidadeY = parseFloat(document.querySelector("#velocidadeY").value || 0);
+
+
+  satelites.push(
+    new Tiro({
+      position: {
+        x: canvas.width / 2,
+        y: planeta.position.y - planeta.raio - 80,
+      },
+      raio: 15,
+      color: "#eee",
+      massa: 1,
+      velocidade: {
+        x: velocidadeX,
+        y: velocidadeY,
+      },
+      aceleracao: {
+        x: 0,
+        y: 0,
+      },
+    })
+  )
+
 }

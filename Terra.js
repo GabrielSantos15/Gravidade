@@ -9,18 +9,13 @@ class Planeta {
   }
   draw() {
     ctx.beginPath();
-    if (this.image) {
-      ctx.drawImage(
-        this.image,
-        this.position.x - this.raio,
-        this.position.y - this.raio,
-        this.raio * 2,
-        this.raio * 2
-      );
-    } else {
-      ctx.fillStyle = this.color;
-      ctx.arc(this.position.x, this.position.y, this.raio, 0, 2 * Math.PI);
-    }
+    ctx.drawImage(
+      this.image,
+      this.position.x - this.raio,
+      this.position.y - this.raio,
+      this.raio * 2,
+      this.raio * 2
+    );
 
     ctx.fill();
   }
