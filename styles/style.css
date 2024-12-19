@@ -11,7 +11,7 @@ body{
 
 canvas {
     background-color: black;
-    background-image: url(images/universe.jpg);
+    background-image: url(../img/universe.jpg);
 }
 
 details {

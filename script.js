@@ -1,17 +1,20 @@
 const canvas = document.querySelector("#tela");
 const ctx = canvas.getContext("2d");
 
+
 canvas.width = document.documentElement.clientWidth;
 canvas.height = document.documentElement.clientHeight;
 
+ctx.translate(canvas.width/2,canvas.height/2)
+
 const planeta = new Planeta({
   position: {
-    x: canvas.width / 2,
-    y: canvas.height / 2,
+    x: 0,
+    y: 0,
   },
-  raio: 150,
+  raio: 200,
   color: "#55f",
-  imageSrc: "Images/Planet.png",
+  imageSrc: "img/Planet.png",
   massa: 9999,
 });
 
@@ -35,7 +38,7 @@ const canhao = {
 const satelites = [];
 
 function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(-canvas.width/2, -canvas.height/2, canvas.width, canvas.height);
   // Desenhando o fundo do jogo
 
   ctx.beginPath();
@@ -46,6 +49,7 @@ function draw() {
     satelite.draw();
   });
   updateInfos()
+
 
   requestAnimationFrame(draw);
 }
@@ -104,12 +108,12 @@ function Atirar(){
   satelites.push(
     new Tiro({
       position: {
-        x: canvas.width / 2,
-        y: planeta.position.y - planeta.raio - 80,
+        x: canhao.position.x,
+        y: canhao.position.y - 50,
       },
-      raio: 15,
+      raio: 10,
       color: "#eee",
-      massa: 1,
+      massa: .01,
       velocidade: {
         x: velocidadeX,
         y: velocidadeY,
